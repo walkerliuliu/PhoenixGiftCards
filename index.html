@@ -137,11 +137,30 @@
       color: #1d4ed8;
       border: 1px solid #bfdbfe;
       white-space: nowrap;
+      display: inline-block;
+      margin-bottom: 0.25rem;
     }
 
     .deal-value {
       font-size: 1.05rem;
       font-weight: 700;
+    }
+
+    .meta-line {
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+
+    .notes {
+      font-size: 0.8rem;
+      color: #374151;
+    }
+
+    .card-footer {
+      margin-top: 0.25rem;
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.8rem;
     }
 
     .card-footer a {
@@ -152,19 +171,25 @@
     .card-footer a:hover {
       text-decoration: underline;
     }
+
+    #noResults {
+      text-align: center;
+      margin-top: 1rem;
+      color: #6b7280;
+    }
   </style>
 </head>
 
 <body>
   <div class="disclaimer">
-    Please verify gift card expiration dates, bonus card rules, and terms before purchasing. Deals may vary by location.
+    Please verify gift card expiration dates, bonus card rules, locations, and terms before purchasing. Deals may change or vary by location.
   </div>
 
   <div class="page">
     <header>
       <div>
         <h1>Black Friday Gift Card Deals</h1>
-        <div class="subtitle">Phoenix / Scottsdale gift card bonuses for 2024</div>
+        <div class="subtitle">Phoenix / Scottsdale (& nearby) gift card bonuses</div>
       </div>
       <div class="subtitle" id="deal-count"></div>
     </header>
@@ -172,7 +197,7 @@
     <section class="filters">
       <div class="filter-group">
         <label for="search">Search</label>
-        <input id="search" type="text" placeholder="Restaurant, bar, spa..." />
+        <input id="search" type="text" placeholder="Restaurant, bar, steakhouse, sushi..." />
       </div>
       <div class="filter-group">
         <label for="city">City</label>
@@ -202,13 +227,14 @@
     </section>
 
     <section id="dealsContainer" class="deals-grid"></section>
-    <div id="noResults" style="display:none; text-align:center; margin-top:1rem; color:#6b7280;">
+    <div id="noResults" style="display:none;">
       No deals match your filters.
     </div>
   </div>
 
   <script>
     const deals = [
+      // Existing deals
       {
         business: "La Grande Orange",
         city: "Phoenix / Scottsdale",
@@ -230,7 +256,7 @@
       {
         business: "Buck & Rider",
         city: "Phoenix / Scottsdale",
-        category: "Restaurant",
+        category: "Seafood / Steak",
         minSpend: 100,
         bonusAmount: 30,
         url: "https://wwws-usa2.givex.com/cws4.0/buckandrider/",
@@ -248,7 +274,7 @@
       {
         business: "Flower Child",
         city: "Phoenix / Scottsdale",
-        category: "Restaurant",
+        category: "Healthy Fast-Casual",
         minSpend: 50,
         bonusAmount: 10,
         url: "https://www.iamaflowerchild.com/gift-cards/",
@@ -257,7 +283,7 @@
       {
         business: "North Italia",
         city: "Phoenix / Scottsdale",
-        category: "Restaurant",
+        category: "Italian",
         minSpend: 100,
         bonusAmount: 20,
         url: "https://www.northitalia.com/gift-cards/",
@@ -266,7 +292,7 @@
       {
         business: "Wildflower Bread",
         city: "Phoenix / Scottsdale",
-        category: "Restaurant",
+        category: "Bakery / Cafe",
         minSpend: 100,
         bonusAmount: 25,
         url: "https://shop.wildflowerbread.com/",
@@ -293,7 +319,7 @@
       {
         business: "Sauce Pizza & Wine",
         city: "Phoenix / Scottsdale",
-        category: "Restaurant",
+        category: "Pizza / Wine",
         minSpend: 25,
         bonusAmount: 5,
         url: "https://www.saucepizzaandwine.com/gift-cards/",
@@ -308,6 +334,107 @@
         url: "https://www.culinarydropout.com/",
         notes: ""
       },
+
+      // NEW DEALS YOU PROVIDED
+      {
+        business: "Pomo Pizzeria",
+        city: "Phoenix / Scottsdale",
+        category: "Pizzeria",
+        minSpend: 100,
+        bonusAmount: 25,
+        url: "https://pomopizzeria.com/",
+        notes: "Buy $100 gift card, get an additional $25 card."
+      },
+      {
+        business: "Uchi",
+        city: "Phoenix / Scottsdale",
+        category: "Sushi / Japanese",
+        minSpend: 200,
+        bonusAmount: 30,
+        url: "https://uchi.uchirestaurants.com/",
+        notes: "Buy $200 gift card, get an additional $30 card."
+      },
+      {
+        business: "STK Steakhouse",
+        city: "Phoenix / Scottsdale",
+        category: "Steakhouse",
+        minSpend: 50,
+        bonusAmount: 10,
+        url: "https://stksteakhouse.com/happenings/stk-holiday-gift-card-offer-get-a-60-bonus/",
+        notes: "Buy $50 gift card, get an additional $10 bonus card."
+      },
+      {
+        business: "STK Steakhouse",
+        city: "Phoenix / Scottsdale",
+        category: "Steakhouse",
+        minSpend: 200,
+        bonusAmount: 60,
+        url: "https://stksteakhouse.com/happenings/stk-holiday-gift-card-offer-get-a-60-bonus/",
+        notes: "Buy $200 gift card, get an additional $60 bonus card."
+      },
+      {
+        business: "Roka Akor",
+        city: "Scottsdale",
+        category: "Japanese Steak / Sushi",
+        minSpend: 100,
+        bonusAmount: 25,
+        url: "https://rokaakor.com/scottsdale/",
+        notes: "Buy $100 gift card, get a $25 promotional card."
+      },
+      {
+        business: "The Gladly",
+        city: "Phoenix",
+        category: "Restaurant",
+        minSpend: 100,
+        bonusAmount: 20,
+        url: "https://www.thegladly.com/",
+        notes: "Gift cards also good at Citizen Public House, Beginner’s Luck, and Minnow."
+      },
+      {
+        business: "Citizen Public House",
+        city: "Scottsdale",
+        category: "Restaurant / Gastropub",
+        minSpend: 100,
+        bonusAmount: 20,
+        url: "https://www.citizenpublichouse.com/",
+        notes: "Buy $100 gift card, get a $20 promotional card."
+      },
+      {
+        business: "Tocaya",
+        city: "Phoenix / Scottsdale",
+        category: "Modern Mexican",
+        minSpend: 100,
+        bonusAmount: 30,
+        url: "https://www.tocaya.com/",
+        notes: "Buy $100 gift card, get an additional $30 gift card."
+      },
+      {
+        business: "Cien Agaves",
+        city: "Scottsdale",
+        category: "Mexican",
+        minSpend: 50,
+        bonusAmount: 10,
+        url: "https://www.cienagaves.com/",
+        notes: "Buy $50 gift card, get an additional $10 gift card."
+      },
+      {
+        business: "Cien Agaves",
+        city: "Scottsdale",
+        category: "Mexican",
+        minSpend: 100,
+        bonusAmount: 25,
+        url: "https://www.cienagaves.com/",
+        notes: "Buy $100 gift card, get an additional $25 gift card."
+      },
+      {
+        business: "Barrio Queen",
+        city: "Phoenix / Scottsdale",
+        category: "Mexican",
+        minSpend: 50,
+        bonusAmount: 10,
+        url: "https://www.barrioqueen.com/",
+        notes: "Buy $50 gift card, get an additional $10 gift card."
+      }
     ];
 
     function computeBonusPct(d) {
@@ -322,7 +449,8 @@
     const dealCountEl = document.getElementById("deal-count");
     const noResultsEl = document.getElementById("noResults");
 
-    const cities = [...new Set(deals.map(d => d.city))];
+    // Populate city dropdown
+    const cities = [...new Set(deals.map(d => d.city))].sort();
     cities.forEach(c => {
       const opt = document.createElement("option");
       opt.value = c;
@@ -344,9 +472,11 @@
           d.category.toLowerCase().includes(term)
         );
       }
+
       if (cityFilter) {
         filtered = filtered.filter(d => d.city === cityFilter);
       }
+
       if (minBonus > 0) {
         filtered = filtered.filter(d => d.bonusPct >= minBonus);
       }
@@ -356,6 +486,7 @@
         if (sortBy === "bonus") return b.bonusAmount - a.bonusAmount;
         if (sortBy === "minSpend") return a.minSpend - b.minSpend;
         if (sortBy === "name") return a.business.localeCompare(b.business);
+        return 0;
       });
 
       dealsContainer.innerHTML = "";
@@ -367,20 +498,20 @@
       }
 
       noResultsEl.style.display = "none";
-      dealCountEl.textContent = `${filtered.length} deals`;
+      dealCountEl.textContent = `${filtered.length} deal${filtered.length !== 1 ? "s" : ""}`;
 
       filtered.forEach(d => {
         const card = document.createElement("div");
         card.className = "card";
 
         card.innerHTML = `
-          <a class="biz-name" href="${d.url}" target="_blank">${d.business}</a>
-          <div class="badge">${d.bonusPct}% bonus</div>
+          <a class="biz-name" href="${d.url}" target="_blank" rel="noopener noreferrer">${d.business}</a>
+          <span class="badge">${d.bonusPct}% bonus</span>
           <div class="deal-value">Buy $${d.minSpend} → Get $${d.bonusAmount}</div>
-          <div style="color:#6b7280; font-size:0.85rem;">${d.city} · ${d.category}</div>
-          ${d.notes ? `<div style="font-size:0.8rem;">${d.notes}</div>` : ""}
+          <div class="meta-line">${d.city} · ${d.category}</div>
+          ${d.notes ? `<div class="notes">${d.notes}</div>` : ""}
           <div class="card-footer">
-            <a href="${d.url}" target="_blank">Buy Gift Card →</a>
+            <a href="${d.url}" target="_blank" rel="noopener noreferrer">Buy Gift Card →</a>
           </div>
         `;
         dealsContainer.appendChild(card);
